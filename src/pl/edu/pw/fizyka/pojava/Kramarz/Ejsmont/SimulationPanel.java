@@ -44,7 +44,7 @@ public class SimulationPanel extends JPanel {
 		setBackground(new Color(28, 40, 51));
 		setPreferredSize(new Dimension(280, 700));
 		setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(new Color(212, 230, 241)),
-				"Wynik symulacji", TitledBorder.LEFT, TitledBorder.TOP, getFont(), new Color(212, 230, 241)));
+		"Ustawienia ogólne", TitledBorder.LEFT, TitledBorder.TOP, getFont(), new Color(212, 230, 241)));
 
 		drawnLines = new ArrayList<Line>();
 		initElectrons = new ArrayList<Electron>();
@@ -73,7 +73,7 @@ public class SimulationPanel extends JPanel {
 		for (Line line3 : thirdDrawnLines) {
 			line3.draw((Graphics2D) g);
 		}
-		g.setColor(Color.white);
+		g.setColor(new Color(255, 255, 255, 50));
 		g.drawLine(20, 50, 220, 50); //300km
 		g.drawLine(20, 250, 220, 250); //200km
 		g.drawLine(20, 450, 220, 450); //100km
@@ -139,7 +139,7 @@ public class SimulationPanel extends JPanel {
 						+ (int) (0.2*2.5*Math.pow(10, -4) * (firstAltitudeElectrons.get(i).getVelocity() / 500))));
 				
 			if (waveEmissionFirstAlt.emissionProbability(firstAltitudeElectrons.get(i).getyLocation()) == true) {
-				Color waveColor = waveEmissionFirstAlt.colorEmission();
+				Color waveColor = waveEmissionFirstAlt.colorEmission(firstAltitudeElectrons.get(i).getzLocation());
 				double velocityLoss = waveEmissionFirstAlt.LostVelocity(waveColor);
 				firstAltitudeElectrons.get(i).setVelocity(firstAltitudeElectrons.get(i).getVelocity() - velocityLoss);
 				firstDrawnLines.add(new Line(firstAltitudeElectrons.get(i).getxLocation(),
@@ -170,7 +170,7 @@ public class SimulationPanel extends JPanel {
 						+ (int) (0.2*2.5*Math.pow(10, -4) * (secondAltitudeElectrons.get(i).getVelocity() / 500)));
 			
 			if (waveEmissionSecondAlt.emissionProbability(secondAltitudeElectrons.get(i).getyLocation()) == true) {
-				Color waveColor = waveEmissionSecondAlt.colorEmission();
+				Color waveColor = waveEmissionSecondAlt.colorEmission(secondAltitudeElectrons.get(i).getzLocation());
 				double velocityLoss = waveEmissionSecondAlt.LostVelocity(waveColor);
 				secondAltitudeElectrons.get(i).setVelocity(secondAltitudeElectrons.get(i).getVelocity() - velocityLoss);
 				secondDrawnLines.add(new Line(secondAltitudeElectrons.get(i).getxLocation(),
@@ -200,7 +200,7 @@ public class SimulationPanel extends JPanel {
 						+ (int) (0.2*2.5*Math.pow(10, -4) * (thirdAltitudeElectrons.get(i).getVelocity() / 500)));
 			
 			if (waveEmissionThirdAlt.emissionProbability(thirdAltitudeElectrons.get(i).getyLocation()) == true) {
-				Color waveColor = waveEmissionThirdAlt.colorEmission();
+				Color waveColor = waveEmissionThirdAlt.colorEmission(thirdAltitudeElectrons.get(i).getzLocation());
 				double velocityLoss = waveEmissionThirdAlt.LostVelocity(waveColor);
 				thirdAltitudeElectrons.get(i).setVelocity(thirdAltitudeElectrons.get(i).getVelocity() - velocityLoss);
 				//System.out.println(thirdAltitudeElectrons.get(i).getVelocity());

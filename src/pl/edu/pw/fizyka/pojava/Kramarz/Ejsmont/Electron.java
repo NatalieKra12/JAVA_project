@@ -19,22 +19,31 @@ public class Electron {
 	
 	public Electron (double energyInit, int xLocation) {
 		super();
-		this.xLocation = xLocation+20;
+		this.xLocation = countXLocation();
 		this.yLocation = countYLocation();
-		this.zLocation = 10;	//to be corrected during third phase
+		this.zLocation = countZLocation();	//to be corrected during third phase
 		this.energyInit = energyInit; //keV
 		this.velocity = countInitVelocity(this.energyInit);
 		this.startTime = System.nanoTime();
 	}//end of Electron constructor
+	public int countXLocation() {
+		 Random randXLocation = new Random();
+		 return randXLocation.nextInt(200)+20;
+	 }//end of countYLocation method
 	
 	public int countYLocation() {
 		 Random randYLocation = new Random();
 		 return randYLocation.nextInt(100)+50;
 	 }//end of countYLocation method
 	
+	public int countZLocation() {
+		 Random randZLocation = new Random();
+		 return randZLocation.nextInt(100);
+	 }//end of countYLocation method
+	
 	public double countInitVelocity(double energyOfElectron) {
 		Random randVelocityDeviation = new Random();
-		energyOfElectron = randVelocityDeviation.nextDouble(4)+energyOfElectron;
+		energyOfElectron = randVelocityDeviation.nextDouble()*4+energyOfElectron;
 		double energyOfElectronJoul = energyOfElectron*1000*1.602*Math.pow(10, -19); //Joul
 		//System.out.println(Math.sqrt(2*energyOfElectronJoul/electronMass));
 		return Math.sqrt(2*energyOfElectronJoul/electronMass); //m/s

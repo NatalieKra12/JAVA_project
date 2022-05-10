@@ -11,7 +11,6 @@ import java.awt.GridLayout;
 import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -22,6 +21,7 @@ import javax.swing.SwingUtilities;
 import javax.swing.border.TitledBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+
 
 public class GraphicalUserInterface extends JFrame implements ActionListener {
 	private static final long serialVersionUID = 1L;
@@ -82,7 +82,7 @@ public class GraphicalUserInterface extends JFrame implements ActionListener {
 		//userInterface settings
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		this.setMinimumSize(new Dimension(500, 800));
-		//this.setSize(600,700);
+		this.setSize(600,700);
 		this.setTitle("Symulacja zorzy polarnej");
 		this.setLayout(new BorderLayout());	
 		
@@ -156,14 +156,14 @@ public class GraphicalUserInterface extends JFrame implements ActionListener {
 		energyPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 35));
 		energyPanel.setBackground(new Color(98, 101, 103));
 		energyPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(new Color(212, 230, 241)),
-		"Energia elektronów" ,TitledBorder.LEFT, TitledBorder.TOP, getFont(), new Color(212, 230, 241)));
+		"Energia Elektronów" ,TitledBorder.LEFT, TitledBorder.TOP, getFont(), new Color(212, 230, 241)));
 		slidersPanel.add(energyPanel);
 		
 		densityPanel = new JPanel();
 		densityPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 35));
 		densityPanel.setBackground(new Color(98, 101, 103));
 		densityPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(new Color(212, 230, 241)),
-		"Gęstość" ,TitledBorder.LEFT, TitledBorder.TOP, getFont(), new Color(212, 230, 241)));
+		"Gęstość powietrza na 100km" ,TitledBorder.LEFT, TitledBorder.TOP, getFont(), new Color(212, 230, 241)));
 		slidersPanel.add(densityPanel);
 		
 		firstAttitudeSection = new JPanel();
@@ -184,7 +184,7 @@ public class GraphicalUserInterface extends JFrame implements ActionListener {
 		thirdAttitudeSection.setBackground(new Color(98, 101, 103));
 		thirdAttitudeSection.setLayout(new GridBagLayout());
 		thirdAttitudeSection.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(new Color(212, 230, 241)),
-		"Wysokość 100km" ,TitledBorder.LEFT, TitledBorder.TOP, getFont(), new Color(212, 230, 241)));
+		"Wysokość 100km",TitledBorder.LEFT, TitledBorder.TOP, getFont(), new Color(212, 230, 241)));
 		slidersPanel.add(thirdAttitudeSection);
 		
 		//elements in energyPanel settings
