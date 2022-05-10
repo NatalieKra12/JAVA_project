@@ -144,7 +144,7 @@ public class SimulationPanel extends JPanel {
 				firstAltitudeElectrons.get(i).setVelocity(firstAltitudeElectrons.get(i).getVelocity() - velocityLoss);
 				firstDrawnLines.add(new Line(firstAltitudeElectrons.get(i).getxLocation(),
 						firstAltitudeElectrons.get(i).getyLocation(), firstAltitudeElectrons.get(i).getxLocation(),
-						firstAltitudeElectrons.get(i).getyLocation() + 5, waveColor, waveColor));
+						firstAltitudeElectrons.get(i).getyLocation() + 1, waveColor, waveColor));
 			
 			//System.out.println(firstAltitudeElectrons.get(i).getVelocity()+"    "+velocityLoss);
 			}
@@ -175,7 +175,7 @@ public class SimulationPanel extends JPanel {
 				secondAltitudeElectrons.get(i).setVelocity(secondAltitudeElectrons.get(i).getVelocity() - velocityLoss);
 				secondDrawnLines.add(new Line(secondAltitudeElectrons.get(i).getxLocation(),
 						secondAltitudeElectrons.get(i).getyLocation(), secondAltitudeElectrons.get(i).getxLocation(),
-						secondAltitudeElectrons.get(i).getyLocation() + 5, waveColor, waveColor));
+						secondAltitudeElectrons.get(i).getyLocation() + 1, waveColor, waveColor));
 			}
 			
 			if (secondAltitudeElectrons.get(i).getyLocation() >= 450) {
@@ -206,7 +206,7 @@ public class SimulationPanel extends JPanel {
 				//System.out.println(thirdAltitudeElectrons.get(i).getVelocity());
 				secondDrawnLines.add(new Line(thirdAltitudeElectrons.get(i).getxLocation(),
 						thirdAltitudeElectrons.get(i).getyLocation(), thirdAltitudeElectrons.get(i).getxLocation(),
-						thirdAltitudeElectrons.get(i).getyLocation() + 5, waveColor, waveColor));
+						thirdAltitudeElectrons.get(i).getyLocation() + 1, waveColor, waveColor));
 			}
 		}
 		thirdAltitudeElectrons.removeIf(secondAltitudeElectrons -> secondAltitudeElectrons.getyLocation() > 600);

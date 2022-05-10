@@ -82,7 +82,7 @@ public class GraphicalUserInterface extends JFrame implements ActionListener {
 		//userInterface settings
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		this.setMinimumSize(new Dimension(500, 800));
-		this.setSize(600,700);
+		//this.setSize(600,700);
 		this.setTitle("Symulacja zorzy polarnej");
 		this.setLayout(new BorderLayout());	
 		
