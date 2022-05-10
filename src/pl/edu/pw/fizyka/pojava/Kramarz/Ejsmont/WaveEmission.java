@@ -1,5 +1,5 @@
 package pl.edu.pw.fizyka.pojava.Kramarz.Ejsmont;
-//Author Kramarz, Ejsmont
+//Author Natalia Kramarz, Julia Ejsmont
 
 import java.awt.Color;
 import java.util.Random;
@@ -59,12 +59,12 @@ public class WaveEmission {
 				return waveGreen;
 			}
 			else if(p<=oxygennumber+nitrogennumber) {
-				waveRed = new Color(185,225,0, electronZLocation*2);
+				waveRed = new Color(255,79,0, electronZLocation*2);
 				return waveRed;
 			}
 		
 			else {
-				waveBlue = new Color(185,225,0, electronZLocation*2);
+				waveBlue = new Color(75, 0, 255, electronZLocation*2);
 				return waveBlue;
 			}
 	}//end of colorEmission method
