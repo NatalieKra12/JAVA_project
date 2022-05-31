@@ -97,7 +97,7 @@ public class SimulationPanel extends JPanel {
 			public void run() {
 				createElectrons(electoronEnergySliderValue);
 			}
-		}, 0, 200, TimeUnit.MILLISECONDS);
+		}, 0, 50, TimeUnit.MILLISECONDS);
 	}//end of createInitElectrons method
 	
 	public void createElectrons(int electoronEnergySliderValue) {
@@ -128,7 +128,7 @@ public class SimulationPanel extends JPanel {
 				repaint();
 
 			}
-		}, 0, 200, TimeUnit.MILLISECONDS);
+		}, 0, 50, TimeUnit.MILLISECONDS);
 	}//end of startElectronsMove method
 	
 	public void updatingFirstAltElectrons() {
