@@ -1,5 +1,5 @@
 package pl.edu.pw.fizyka.pojava.Kramarz.Ejsmont;
-//Author Natalia Kramarz, Julia Ejsmont
+//Author Natalia Kramarz
 
 import java.awt.Color;
 import java.util.Random;
@@ -19,7 +19,6 @@ public class WaveEmission {
 	Color waveGreen;
 	Color waveRed;
 	Color waveBlue;
-	
 	
 	public WaveEmission(double airDensityInit, double oxygennumber, double nitrogennumber, double hydrogennumber) {
 		super();
@@ -42,12 +41,10 @@ public class WaveEmission {
 		}
 		else {
 			yLocationDensity =  airDensityInit*Math.exp(-k*((600-(electronYLocation-50))/2-100)); //*10-8 kg/m^3
-			if(((randifEmission.nextDouble())*airDensityInit)<=yLocationDensity*100)
-			{
+			if(((randifEmission.nextDouble())*airDensityInit)<=yLocationDensity*100) {
 				ifEmission = true;
 			}
 		}
-
 		return ifEmission;
 	}//end of EmisionProbability method
 	
@@ -55,18 +52,19 @@ public class WaveEmission {
 		Random randWaveColor = new Random();
 		double p = randWaveColor.nextDouble();
 			if(p<=oxygennumber) {
-				waveGreen = new Color(185,225,0, electronZLocation*2);
+				waveGreen = new Color(185,225,0, electronZLocation*2+54);
 				return waveGreen;
 			}
 			else if(p<=oxygennumber+nitrogennumber) {
-				waveRed = new Color(255,79,0, electronZLocation*2);
+				waveRed = new Color(255,79,0, electronZLocation*2+54);
 				return waveRed;
 			}
 		
 			else {
-				waveBlue = new Color(75, 0, 255, electronZLocation*2);
+				waveBlue = new Color(75, 0, 255, electronZLocation*2+54);
 				return waveBlue;
 			}
+			
 	}//end of colorEmission method
 	
 	public double LostVelocity (Color c) {

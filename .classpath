@@ -6,7 +6,17 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/jfreechart-1.0.19">
+	<classpathentry kind="lib" path="C:/Users/HUAWEI/eclipse-workspace/Laboratory_9/lib/jfreechart-1.0.19.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/HUAWEI/eclipse-workspace/Laboratory_9/lib/jfreechart-1.0.19-experimental.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/HUAWEI/eclipse-workspace/Laboratory_9/lib/jfreechart-1.0.19-swt.jar">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>

@@ -10,8 +10,6 @@ public class Electron {
 	int zLocation;
 	double energyInit;
 	double velocity;
-	long startTime;
-	
 	
 	static double electronMass = 9.11*Math.pow(10, -31); // kg
 	static double planckConstant = 6.63*Math.pow(10, -34); // m^2*kg/s
@@ -21,11 +19,11 @@ public class Electron {
 		super();
 		this.xLocation = countXLocation();
 		this.yLocation = countYLocation();
-		this.zLocation = countZLocation();	//to be corrected during third phase
+		this.zLocation = countZLocation();
 		this.energyInit = energyInit; //keV
 		this.velocity = countInitVelocity(this.energyInit);
-		this.startTime = System.nanoTime();
 	}//end of Electron constructor
+	
 	public int countXLocation() {
 		 Random randXLocation = new Random();
 		 return randXLocation.nextInt(200)+20;
@@ -45,7 +43,6 @@ public class Electron {
 		Random randVelocityDeviation = new Random();
 		energyOfElectron = randVelocityDeviation.nextDouble()*4+energyOfElectron;
 		double energyOfElectronJoul = energyOfElectron*1000*1.602*Math.pow(10, -19); //Joul
-		//System.out.println(Math.sqrt(2*energyOfElectronJoul/electronMass));
 		return Math.sqrt(2*energyOfElectronJoul/electronMass); //m/s
 	 }//end of countInitVelocity method
 	
@@ -89,13 +86,5 @@ public class Electron {
 	public void setVelocity(double velocity) {
 		this.velocity = velocity;
 	}
-	
-	public long getStartTime() {
-		return startTime;
-	}
-	public void setStartTime(long startTime) {
-		this.startTime = startTime;
-	}
 
-}
-
+}//end Electron class
