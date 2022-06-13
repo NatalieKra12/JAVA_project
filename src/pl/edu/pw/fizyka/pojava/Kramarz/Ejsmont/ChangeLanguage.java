@@ -25,7 +25,7 @@ public class ChangeLanguage{
 		namesOfElements.add("STOP");
 		namesOfElements.add("RESTARTUJ");
 		namesOfElements.add("ZAKOŃCZ");
-		namesOfElements.add("WYBIERZ JEZYK");
+		namesOfElements.add("WYBIERZ JĘZYK");
 		namesOfElements.add("WIDOK-ZIEMIA");
 	}//end addInitNames
 	
@@ -67,7 +67,7 @@ public class ChangeLanguage{
 		namesOfElements.add("STOP");
 		namesOfElements.add("RESTARTUJ");
 		namesOfElements.add("ZAKOŃCZ");
-		namesOfElements.add("WYBIERZ JEZYK");
+		namesOfElements.add("WYBIERZ JĘZYK");
 		namesOfElements.add("WIDOK-ZIEMIA");
 	}//end changeToPolish
 	
