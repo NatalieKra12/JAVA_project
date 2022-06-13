@@ -49,7 +49,7 @@ public class SimulationPanel extends JPanel {
 	
 	public SimulationPanel() {
 		BorderforSimulationPanel = new TitledBorder(BorderFactory.createLineBorder(new Color(212, 230, 241)),
-		"Symulacja", TitledBorder.LEFT, TitledBorder.TOP, getFont(), new Color(212, 230, 241));
+		"", TitledBorder.LEFT, TitledBorder.TOP, getFont(), new Color(212, 230, 241));
 		
 		setBackground(new Color(28, 40, 51));
 		setPreferredSize(new Dimension(280, 700));
