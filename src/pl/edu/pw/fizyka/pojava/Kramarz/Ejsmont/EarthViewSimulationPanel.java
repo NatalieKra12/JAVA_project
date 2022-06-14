@@ -1,8 +1,7 @@
 package pl.edu.pw.fizyka.pojava.Kramarz.Ejsmont;
-//Author Natalia Kramarz, Julia Ejsmont
+//Author Natalia Kramarz
 
 import javax.swing.*;
-import javax.swing.border.TitledBorder;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Date;
@@ -11,22 +10,21 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-public class SimulationPanel extends JPanel {
+public class EarthViewSimulationPanel extends JPanel {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
-	//public List<Line> drawnLines;
 	public List<Line> allDrawnLines;
 	public CopyOnWriteArrayList<Line> LinesCopy;
-	public List<Electron> initElectrons;
-	public List<Electron> allAltitudeElectrons;
+	public List<EarthViewElectron> initElectrons;
+	public List<EarthViewElectron> allAltitudeElectrons;
 
-	WaveEmission waveEmissionFirstAlt;
-	WaveEmission waveEmissionSecondAlt;
-	WaveEmission waveEmissionThirdAlt;
-	WaveEmission allEmissionThirdAlt;
+	EarthViewWaveEmission waveEmissionFirstAlt;
+	EarthViewWaveEmission waveEmissionSecondAlt;
+	EarthViewWaveEmission waveEmissionThirdAlt;
+	EarthViewWaveEmission allEmissionThirdAlt;
 
 	boolean ifToAdd = false;
 	
@@ -42,53 +40,51 @@ public class SimulationPanel extends JPanel {
 	double velocityLoss;
 	Date dateTime;
 	long currentTime = 0;
-
-
-	TitledBorder BorderforSimulationPanel;
 	
-	public SimulationPanel() {
-		BorderforSimulationPanel = new TitledBorder(BorderFactory.createLineBorder(new Color(212, 230, 241)),
-		"Symulacja", TitledBorder.LEFT, TitledBorder.TOP, getFont(), new Color(212, 230, 241));
+	int lineHeight = 0;
+	int lineWidth =  0;
+	
+	Image background;
+	
+	public EarthViewSimulationPanel() {
 		
 		setBackground(new Color(0, 0, 27));
-		setPreferredSize(new Dimension(280, 700));
-		setBorder(BorderforSimulationPanel);
-
-		initElectrons = new ArrayList<Electron>();
-		allAltitudeElectrons = new ArrayList<Electron>();
+		setPreferredSize(new Dimension(400, 500));
+		this.setLayout(new FlowLayout(FlowLayout.RIGHT));
+		initElectrons = new ArrayList<EarthViewElectron>();
+		allAltitudeElectrons = new ArrayList<EarthViewElectron>();
 		allDrawnLines = new ArrayList<Line>();
 		LinesCopy = new CopyOnWriteArrayList<Line>();
 		
 		dateTime = new Date();
+		background = Toolkit.getDefaultToolkit().createImage("IMG\\Background.jpg");
 		
-	}//end of SimulationPanel constructor
+	}//end of EarthViewSimulationPanel constructor
 
 	//@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
+		 g.drawImage(background, 0, 0, null);
 		if(!LinesCopy.isEmpty()) {
 			for(Line line: LinesCopy) {
-				line.draw((Graphics2D) g);
+				if(line.getxLineStart()>=0 || line.getxLineEnd()<=this.getWidth()) {
+					line.draw((Graphics2D) g);
+				}
 			}
-		}
-		g.setColor(new Color(255, 255, 255, 50));
-		g.drawLine(10, 50, this.getWidth()-10, 50); //300km
-		g.drawLine(20, 250, this.getWidth()-10, 250); //200km
-		g.drawLine(20, 450, this.getWidth()-10, 450); //100km
-		g.drawLine(20, 650, this.getWidth()-10, 650); //0km			
+		}	
 	}//end of paintComponent method
 
 	public void createWaveEmission(int densityofAir, int oxygenFirst, int nitrogenFirst, int hydrogenFirst, int oxygenSecond, int nitrogenSecond,
 			int hydrogenSecond, int oxygenThird, int nitrogenThird, int hydrogenThird) {
-		waveEmissionFirstAlt = new WaveEmission(densityofAir, oxygenFirst, nitrogenFirst, hydrogenFirst);
-		waveEmissionSecondAlt = new WaveEmission(densityofAir, oxygenSecond, nitrogenSecond, hydrogenSecond);
-		waveEmissionThirdAlt = new WaveEmission(densityofAir, oxygenThird, nitrogenThird, hydrogenThird);
+		waveEmissionFirstAlt = new EarthViewWaveEmission(densityofAir, oxygenFirst, nitrogenFirst, hydrogenFirst);
+		waveEmissionSecondAlt = new EarthViewWaveEmission(densityofAir, oxygenSecond, nitrogenSecond, hydrogenSecond);
+		waveEmissionThirdAlt = new EarthViewWaveEmission(densityofAir, oxygenThird, nitrogenThird, hydrogenThird);
 	}//end of createWaveEmission method
 	
 	public void createElectrons(int electoronEnergySliderValue) {
 		initElectrons.removeAll(initElectrons);
-		for(int numberOfInitElectrons = 0; numberOfInitElectrons < 50; numberOfInitElectrons++) {
-			Electron newElectron = new Electron(electoronEnergySliderValue, 2 + numberOfInitElectrons);
+		for(int numberOfInitElectrons = 0; numberOfInitElectrons < 40; numberOfInitElectrons++) {
+			EarthViewElectron newElectron = new EarthViewElectron(electoronEnergySliderValue, 2 + numberOfInitElectrons);
 			initElectrons.add(newElectron);
 		}
 	}//end of createElectrons method
@@ -154,12 +150,16 @@ public class SimulationPanel extends JPanel {
 		if(!allAltitudeElectrons.isEmpty()) {
 			numberOfElectrons = allAltitudeElectrons.size();
 		for (int i = 0; i < numberOfElectrons; i++) {
+			calculateLineSize(allAltitudeElectrons.get(i).getyLocation());
 			allAltitudeElectrons.get(i).setyLocation((allAltitudeElectrons.get(i).getyLocation()
-						+ (int) (0.2*2.5*Math.pow(10, -4) * (allAltitudeElectrons.get(i).getVelocity() / 500))));
+						+ (int) (0.1*2.5*Math.pow(10, -4) * (allAltitudeElectrons.get(i).getVelocity() / 500))));
 			
-			if(allAltitudeElectrons.get(i).getyLocation() > 450) {
+			allAltitudeElectrons.get(i).setxLocation((allAltitudeElectrons.get(i).getxLocation()
+					+ (int) (0.25*0.2*2.5*Math.pow(10, -4) * (allAltitudeElectrons.get(i).getVelocity() / 500))));
+			
+			if(allAltitudeElectrons.get(i).getyLocation() > 400) {
 				if (waveEmissionThirdAlt.emissionProbability(allAltitudeElectrons.get(i).getyLocation()) == true) {
-					waveColor = waveEmissionThirdAlt.colorEmission(allAltitudeElectrons.get(i).getzLocation(), allAltitudeElectrons.get(i).getyLocation());
+					waveColor = waveEmissionThirdAlt.colorEmission(allAltitudeElectrons.get(i).getyLocation());
 					velocityLoss = waveEmissionThirdAlt.LostVelocity(waveColor);
 					ifToAdd = true;
 				}
@@ -167,7 +167,7 @@ public class SimulationPanel extends JPanel {
 			}
 			else if(allAltitudeElectrons.get(i).getyLocation() > 250) {
 				if (waveEmissionSecondAlt.emissionProbability(allAltitudeElectrons.get(i).getyLocation()) == true) {
-					waveColor = waveEmissionSecondAlt.colorEmission(allAltitudeElectrons.get(i).getzLocation(), allAltitudeElectrons.get(i).getyLocation());
+					waveColor = waveEmissionSecondAlt.colorEmission(allAltitudeElectrons.get(i).getyLocation());
 					velocityLoss = waveEmissionSecondAlt.LostVelocity(waveColor);
 					ifToAdd = true;
 				}
@@ -175,10 +175,9 @@ public class SimulationPanel extends JPanel {
 			
 			else if (allAltitudeElectrons.get(i).getyLocation() <= 250){
 				if (waveEmissionFirstAlt.emissionProbability(allAltitudeElectrons.get(i).getyLocation()) == true) {
-					waveColor = waveEmissionFirstAlt.colorEmission(allAltitudeElectrons.get(i).getzLocation(), allAltitudeElectrons.get(i).getyLocation());
+					waveColor = waveEmissionFirstAlt.colorEmission(allAltitudeElectrons.get(i).getyLocation());
 					velocityLoss = waveEmissionFirstAlt.LostVelocity(waveColor);
 					ifToAdd = true;
-					//System.out.println(ifToAdd);
 				}
 			}
 			
@@ -186,17 +185,39 @@ public class SimulationPanel extends JPanel {
 				currentTime = dateTime.getTime();
 				allAltitudeElectrons.get(i).setVelocity(allAltitudeElectrons.get(i).getVelocity() - velocityLoss);
 				allDrawnLines.add(new Line(allAltitudeElectrons.get(i).getxLocation(),
-						allAltitudeElectrons.get(i).getyLocation(), allAltitudeElectrons.get(i).getxLocation(),
-						allAltitudeElectrons.get(i).getyLocation() + 4, waveColor, currentTime));
+						allAltitudeElectrons.get(i).getyLocation(), allAltitudeElectrons.get(i).getxLocation()+lineWidth,
+						allAltitudeElectrons.get(i).getyLocation() + lineHeight, waveColor, currentTime));
 				ifToAdd = false;
-				//System.out.println(ifToAdd);
 			}
 		}//end of for
 		
-		allAltitudeElectrons.removeIf(allAltitudeElectrons -> allAltitudeElectrons.getyLocation() >= 650);	//absolute board is 250
+		allAltitudeElectrons.removeIf(allAltitudeElectrons -> allAltitudeElectrons.getyLocation() >= 500);	//absolute board is 250
 		allAltitudeElectrons.removeIf(allAltitudeElectrons -> allAltitudeElectrons.getVelocity() <= 0);
 		}
 	}//end updatingAllElectrons
+	
+	public void calculateLineSize(int Height) {
+		if(Height<100) {
+			lineHeight = 1;
+			lineWidth =1;
+		}
+		else if(Height<200) {
+			lineHeight = 2;
+			lineWidth = 1;
+		}
+		else if(Height<250) {
+			lineHeight = 4;
+			lineWidth = 2;
+		}
+		else if(Height<300) {
+			lineHeight = 6;
+			lineWidth = 3;
+		}
+		else if(Height<350) {
+			lineHeight = 8;
+			lineWidth = 4;
+		}
+	}//end calculateLineSize 
 	
 	public void clearAll() throws InterruptedException {
 		if(paintingTimerWorks) {

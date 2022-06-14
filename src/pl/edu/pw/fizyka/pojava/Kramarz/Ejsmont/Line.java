@@ -23,73 +23,79 @@ public class Line {
   }//end Line constructror
   
   public void calculateEmissionTime() {
-  	if(emissionColor.getGreen() == 225) {
-  		setEmissionTime(70);
-  	}
-  	else if(emissionColor.getRed() == 255) {
-  		setEmissionTime(1100);
-  	}
-  	else if (emissionColor.getBlue() == 255) {
-  		setEmissionTime(60);
-  	}
+	  if(emissionColor.getRed() == 185) { //Oxygen Green
+		  setEmissionTime(70);
+	  }
+	  else if(emissionColor.getRed() == 255) { //Oxygen Red
+		  setEmissionTime(1100);
+	  }
+	  else if(emissionColor.getRed() == 0) { //NitrogenBlue
+		  setEmissionTime(10);
+	  }
+	  else if(emissionColor.getRed() == 255 && emissionColor.getGreen() == 0) { //NitrgoenRed
+		  setEmissionTime(1100);
+	  }
+	  else {//Hydrogen Blue
+		  setEmissionTime(70);
+	  }
+	  
   }//end calculateEmissionTieme
-  
- public void draw(Graphics2D g)
+  public void draw(Graphics2D g)
   {
       g.setColor(emissionColor);
       g.drawLine(xLineStart, yLineStart, xLineEnd, yLineEnd);
   }//end draw
 
- public long getStartEmissionTime() {
-	   return startEmissionTime;
- }
- public void setStartEmissionTime(long startEmissionTime) {
-	   this.startEmissionTime = startEmissionTime;
- }
- public int getEmissionTime() {
-	   return emissionTime;
- }
- public void setEmissionTime(int emissionTime) {
-	   this.emissionTime = emissionTime;
- }
- public int getxLineStart() {
+  public long getStartEmissionTime() {
+	  return startEmissionTime;
+  }
+  public void setStartEmissionTime(long startEmissionTime) {
+	  this.startEmissionTime = startEmissionTime;
+  }
+  public int getEmissionTime() {
+	  return emissionTime;
+  }
+  public void setEmissionTime(int emissionTime) {
+	  this.emissionTime = emissionTime;
+  }
+  public int getxLineStart() {
 	   return xLineStart;
- }
+  }
 
- public void setxLineStart(int xLineStart) {
+  public void setxLineStart(int xLineStart) {
 	   this.xLineStart = xLineStart;
- }
+  }
 
- public int getyLineStart() {
+  public int getyLineStart() {
 	   return yLineStart;
- }
+  }
 
- public void setyLineStart(int yLineStart) {
+  public void setyLineStart(int yLineStart) {
 	   this.yLineStart = yLineStart;
- }
+  }
 
- public int getxLineEnd() {
+  public int getxLineEnd() {
 	   return xLineEnd;
- }
+  }
 
- public void setxLineEnd(int xLineEnd) {
+  public void setxLineEnd(int xLineEnd) {
 	   this.xLineEnd = xLineEnd;
- }
+  }
 
- public int getyLineEnd() {
+  public int getyLineEnd() {
 	   return yLineEnd;
- }
+  }
 
- public void setyLineEnd(int yLineEnd) {
+  public void setyLineEnd(int yLineEnd) {
 	   this.yLineEnd = yLineEnd;
- }
+  }
 
- public Color getemissionColor() {
+  public Color getemissionColor() {
 	   return emissionColor;
- }
+  }
 
- public void setemissionColor(Color emissionColor) {
+  public void setemissionColor(Color emissionColor) {
 	   this.emissionColor = emissionColor;
- }
+  }
 
 }//end of Line class

@@ -4,17 +4,11 @@ package pl.edu.pw.fizyka.pojava.Kramarz.Ejsmont;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.HeadlessException;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -106,6 +100,13 @@ public class GraphicalUserInterface extends JFrame implements ActionListener{
 	private TitledBorder titledBorderForThirdAlt;
 	
 	boolean simulationStopped = false;
+	
+	EarthViewPanel earthViewWindow;
+	int frameXCorner = 0;
+	int frameYCorner = 0;
+	boolean popUpActive = false;
+	boolean simulationPanelActive = false;
+	
 	
 	public GraphicalUserInterface() throws HeadlessException{
 		// TODO Auto-generated constructor stub
@@ -438,6 +439,7 @@ public class GraphicalUserInterface extends JFrame implements ActionListener{
 					nitrogenThirdAtSlider.getValue(), hydrogenThirdAtSlider.getValue());
 			
 			simulationPanel.startElectronsMove(electoronEnergySlider.getValue());
+			simulationPanelActive = true;
 		}//end if start simulation
 		
 		else if(choosenButtonId.equals("stopSimulation")) {
@@ -453,6 +455,8 @@ public class GraphicalUserInterface extends JFrame implements ActionListener{
 			oxygenThirdAtSlider.setEnabled(true);
 			nitrogenThirdAtSlider.setEnabled(true);
 			hydrogenThirdAtSlider.setEnabled(true);
+			
+			simulationPanelActive = false;
 			
 //making simulation stop	
 			try {
@@ -517,6 +521,8 @@ public class GraphicalUserInterface extends JFrame implements ActionListener{
 				e.printStackTrace();
 			}
 			
+			simulationPanelActive = false;
+			
 		}//end if stop simulation
 		
 		else if (choosenButtonId.equals("exit")) {
@@ -555,7 +561,38 @@ public class GraphicalUserInterface extends JFrame implements ActionListener{
 			changeNames();
 		}//end language choice ifs
 		else if(choosenButtonId.equals("earth view")) {
-			System.out.println("Tu widok z ziemi");
+			earthViewWindow = new EarthViewPanel(this.getX(), this.getY());
+			popUpActive = true;
+			try {
+				if(simulationPanelActive) {
+					simulationPanel.timerStop();
+				}
+				
+			} catch (InterruptedException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			earthViewWindow.exitButton.setText(language.namesOfElements.get(14));
+			earthViewWindow.exitButton.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					// TODO Auto-generated method stub
+					try {
+						earthViewWindow.earthViewPanel.clearAll();
+					} catch (InterruptedException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					earthViewWindow.hidePopUp();
+					popUpActive = false;
+				}
+			});
+			earthViewWindow.earthViewPanel.createWaveEmission(atmDensitySlider.getValue(), oxygenFirstAtSlider.getValue(), nitrogenFirstAtSlider.getValue(), hydrogenFirstAtSlider.getValue() ,
+					oxygenSecondAtSlider.getValue(), nitrogenSecondAtSlider.getValue(), hydrogenSecondAtSlider.getValue(), oxygenThirdAtSlider.getValue(),
+					nitrogenThirdAtSlider.getValue(), hydrogenThirdAtSlider.getValue());
+			
+			earthViewWindow.showPopUp();
+			earthViewWindow.earthViewPanel.startElectronsMove(electoronEnergySlider.getValue());
 		}
 	}//end actionPerformed
 	
