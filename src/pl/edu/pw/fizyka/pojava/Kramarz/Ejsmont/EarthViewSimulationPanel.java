@@ -44,7 +44,7 @@ public class EarthViewSimulationPanel extends JPanel {
 	int lineHeight = 0;
 	int lineWidth =  0;
 	
-	Image background;
+	//Image background;
 	
 	public EarthViewSimulationPanel() {
 		
@@ -57,14 +57,14 @@ public class EarthViewSimulationPanel extends JPanel {
 		LinesCopy = new CopyOnWriteArrayList<Line>();
 		
 		dateTime = new Date();
-		background = Toolkit.getDefaultToolkit().createImage("IMG\\Background.jpg");
+		//background = Toolkit.getDefaultToolkit().createImage("IMG\\Background.jpg");
 		
 	}//end of EarthViewSimulationPanel constructor
 
 	//@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		 g.drawImage(background, 0, 0, null);
+		//g.drawImage(background, 0, 0, null);
 		if(!LinesCopy.isEmpty()) {
 			for(Line line: LinesCopy) {
 				if(line.getxLineStart()>=0 || line.getxLineEnd()<=this.getWidth()) {

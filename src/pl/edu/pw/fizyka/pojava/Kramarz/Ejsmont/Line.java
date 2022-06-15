@@ -33,7 +33,7 @@ public class Line {
 		  setEmissionTime(10);
 	  }
 	  else if(emissionColor.getRed() == 255 && emissionColor.getGreen() == 0) { //NitrgoenRed
-		  setEmissionTime(1100);
+		  setEmissionTime(110);
 	  }
 	  else {//Hydrogen Blue
 		  setEmissionTime(70);
